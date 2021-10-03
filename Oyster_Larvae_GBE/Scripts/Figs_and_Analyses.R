@@ -180,9 +180,9 @@ a<-dat_all %>%
   ggplot(.,aes(x = factor(Year), y = D))+
   geom_boxplot(width = 0.7)+
   geom_jitter(width = 0.25, size = 2, alpha = 0.75)+
-  annotate('text', x = 1, y = 12000, label = "a", size = 6)+
-  annotate('text', x = 2, y = 3800, label = "ab", size = 6)+
-  annotate('text', x = 3, y = 3800, label = "b", size = 6)+
+  annotate('text', x = 1, y = 5000, label = "a", size = 6)+
+  annotate('text', x = 2, y = 1300, label = "ab", size = 6)+
+  annotate('text', x = 3, y = 3500, label = "b", size = 6)+
   annotate('text', x = 0.65, y = Inf, label = "A", size = 7, vjust = 3, fontface = 'bold')+
   
   theme_classic()+
@@ -195,9 +195,9 @@ b<-dat_all %>%
   ggplot(.,aes(x = factor(Year), y = V))+
   geom_boxplot(width = 0.7)+
   geom_jitter(width = 0.25, size = 2, alpha = 0.75)+
-  annotate('text', x = 1, y = 2, label = "a", size = 6)+
-  annotate('text', x = 2, y = 1, label = "b", size = 6)+
-  annotate('text', x = 3, y = 3, label = "a", size = 6)+
+  annotate('text', x = 1, y = 1, label = "ab", size = 6)+
+  annotate('text', x = 2, y = 0.3, label = "a", size = 6)+
+  annotate('text', x = 3, y = 1.3, label = "b", size = 6)+
   annotate('text', x = 0.65, y = Inf, label = "B", size = 7, vjust = 3, fontface = 'bold')+
   
   theme_classic()+
