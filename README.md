@@ -1,4 +1,4 @@
-# Temporal dynamics of Eastern oyster larval abundance in Great Bay Estuary, New Hampshire
+# Temporal Dynamics of Eastern Oyster Larval Abundance in Great Bay Estuary, New Hampshire
 Analyses for Stasse et al. 2021 
 
 
