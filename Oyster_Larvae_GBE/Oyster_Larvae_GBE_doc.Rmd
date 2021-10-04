@@ -164,7 +164,7 @@ d | v
 ```
 
 
-```{r Analyses for figure 4, echo = FALSE, warning = FALSE}
+```{r Analyses for figure 4, echo = FALSE, results = "hide"}
 #ANOVA for D hinge and Year
 DYear<-aov(log(D+0.05)~as.factor(Year), data = dat_all)
 summary(DYear)
@@ -176,8 +176,6 @@ summary(VYear)
 
 TukeyHSD(VYear)
 ```
-Model outputs for Figure 4 - Tukey's Test for Larval densities as a function of year
-
 ```{r Figure 4, fig.cap = "Figure 4. Crassostrea virginica larval counts (A) D-hinge and (B) veliger collected from Great Bay Estuary, NH in 2018, 2019, and 2020. Black circles denote observations of larval counts during a given sampling period. Midlines within each boxplot represent median values, and the hinges indicate the first and third quartile ranges (25th and 75th percentiles).", echo = FALSE, fig.height = 4, warning = FALSE}
 a<-dat_all %>% 
   ggplot(.,aes(x = factor(Year), y = D))+
