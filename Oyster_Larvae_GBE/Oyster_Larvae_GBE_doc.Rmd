@@ -176,13 +176,15 @@ summary(VYear)
 
 TukeyHSD(VYear)
 ```
+
+
 ```{r Figure 4, fig.cap = "Figure 4. Crassostrea virginica larval counts (A) D-hinge and (B) veliger collected from Great Bay Estuary, NH in 2018, 2019, and 2020. Black circles denote observations of larval counts during a given sampling period. Midlines within each boxplot represent median values, and the hinges indicate the first and third quartile ranges (25th and 75th percentiles).", echo = FALSE, fig.height = 4, warning = FALSE}
 a<-dat_all %>% 
   ggplot(.,aes(x = factor(Year), y = D))+
   geom_boxplot(width = 0.7)+
-  geom_jitter(width = 0.25, size = 2, alpha = 0.75)+
-  annotate('text', x = 1, y = 5000, label = "a", size = 6)+
-  annotate('text', x = 2, y = 1300, label = "ab", size = 6)+
+  geom_jitter(width = 0.25, size = 2, alpha = 0.5)+
+  annotate('text', x = 1, y = 5500, label = "a", size = 6)+
+  annotate('text', x = 2, y = 2500, label = "ab", size = 6)+
   annotate('text', x = 3, y = 3500, label = "b", size = 6)+
   annotate('text', x = 0.65, y = Inf, label = "A", size = 7, vjust = 3, fontface = 'bold')+
   
@@ -195,10 +197,10 @@ a<-dat_all %>%
 b<-dat_all %>% 
   ggplot(.,aes(x = factor(Year), y = V))+
   geom_boxplot(width = 0.7)+
-  geom_jitter(width = 0.25, size = 2, alpha = 0.75)+
-  annotate('text', x = 1, y = 1, label = "ab", size = 6)+
-  annotate('text', x = 2, y = 0.3, label = "a", size = 6)+
-  annotate('text', x = 3, y = 1.3, label = "b", size = 6)+
+  geom_jitter(width = 0.25, size = 2, alpha = 0.5)+
+  annotate('text', x = 1, y = 1.8, label = "ab", size = 6)+
+  annotate('text', x = 2, y = 0.5, label = "a", size = 6)+
+  annotate('text', x = 3, y = 2.7, label = "b", size = 6)+
   annotate('text', x = 0.65, y = Inf, label = "B", size = 7, vjust = 3, fontface = 'bold')+
   
   theme_classic()+
