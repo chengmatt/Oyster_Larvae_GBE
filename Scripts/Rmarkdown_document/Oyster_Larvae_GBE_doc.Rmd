@@ -7,6 +7,8 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+# Notes: When running code, open the Oyster_Larvae_GBE R project first to make sure working directory is set to the correct location.
+
 ```
 
 This document details the workflow, figures, and analyses for Stasse et al. 2021 - Temporal Dynamics of Eastern Oyster Larval Abundance in Great Bay Estuary, New Hampshire. This has been submitted and accepted in the Journal of Shellfish Research.
