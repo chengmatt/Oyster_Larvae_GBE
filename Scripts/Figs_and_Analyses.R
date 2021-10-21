@@ -3,6 +3,9 @@
 #Date created: 7/26/2021
 #Date updated: 10/3/2021
 
+# Notes: When running code, open the Oyster_Larvae_GBE R project first to make sure working directory is set to the correct location.
+
+
 #load in libraries needed
 library(tidyverse)
 library(patchwork)
