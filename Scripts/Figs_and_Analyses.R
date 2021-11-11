@@ -15,7 +15,7 @@ library(lemon)
 
 # cleaning and setting up data physchem 2018 - 2020 --------------------------------------------
 #load in physchem data
-data_1<-read_csv(here("Data", "Physchem_GBE_2018-2020", "GRBGBWQ.csv"), skip = 2)#skipping first two rows 
+data_1<-read.csv(here("Data", "Physchem_GBE_2018-2020", "GRBGBWQ.csv"), skip = 2)
 
 #only selecting 1:10 character strings to remove time stamps and to only keep dates
 data_1$DateTimeStamp<-substr(data_1$DateTimeStamp, 1,10)
@@ -241,19 +241,21 @@ new_pred<-cbind(predictions, data)
 #plot
 new_pred %>% 
   ggplot(.,aes(x = Temp, y = exp(fit)-0.01))+
-  geom_line(aes(y= exp(fit)-0.01),size = 1.5 )+
-  geom_point(aes(y = Dhinge), alpha = 0.75, size = 2)+
-  geom_ribbon(aes(ymin = exp(lwr)-0.01, ymax = exp(upr)-0.01),alpha = 0.4)+
-  labs(x = "Temperature (°C)",  y = bquote('log D-hinge larval count '~m^-3~''))+
+  geom_line(aes(y= exp(fit)-0.01),size = 1.5, linetype = 'dashed')+
+  geom_point(aes(y = Dhinge), alpha = 0.75, size = 3, color = 
+               "black")+
+  geom_ribbon(aes(ymin = exp(lwr)-0.01, ymax = exp(upr)-0.01),alpha = 0.4,  
+              fill = "#009999")+
+  labs(x = "Temperature (°C)",  y = bquote('D-hinge larval count '~m^-3~''))+
   theme_classic()+
-  theme(axis.title = element_text(size = 25), 
-        axis.text = element_text(size = 23, color = 'black'), 
+  theme(axis.title = element_text(size = 13), 
+        axis.text = element_text(size = 13, color = 'black'), 
         axis.ticks = element_line (colour = "black", size = 1), 
         axis.line = element_line(color = "black", size = 1))+
   ylim(0,1450)#make plot prettier - remove the two large values there....
 
 #save figure
-ggsave(path = here("Figures"), filename = "fig_5.tiff", dpi = 500)
+ggsave(path = here("Figures"), filename = "fig_5.png", dpi = 500)
 
 
 # Figure 6 ----------------------------------------------------------------
