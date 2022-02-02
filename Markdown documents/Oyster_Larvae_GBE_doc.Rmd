@@ -18,8 +18,11 @@ library(patchwork)
 library(lubridate)
 library(here)
 library(lemon)
+library(ggthemes)
 
-data_1<-read_csv(here("Data", "Physchem_GBE_2018-2020", "GRBGBWQ.csv"), skip = 2)#skipping first two rows 
+data_1<-read_csv(here("Data", "297716", "GRBGBWQ.csv"), skip = 2)#skipping first two rows 
+
+source(here("Scripts", "theme_matt.R"))
 
 #only selecting 1:10 character strings to remove time stamps and to only keep dates
 data_1$DateTimeStamp<-substr(data_1$DateTimeStamp, 1,10)
@@ -70,38 +73,40 @@ same_year <- function(x) {
   year(x) <- 2000
   return(x)
 } 
+
   #Temperature plots
 a<-ggplot(phys_data, aes(x = same_year(Date),y = Temp, group = as.factor(year(Date))))+
-  geom_line(aes(linetype = as.factor(year(Date))), size = 1.1)+
-  theme_classic()+
+  geom_line(size = 1.5)+
+  theme_matt()+
   annotate(geom="text",x=as.Date("2000-06-10"),
            y=Inf,label="A",fontface="bold", size = 8, vjust = 2, hjust = 2)+
   labs(x = "",y = "Temperature (°C)", linetype = "Year")+
   theme(axis.title = element_text(size = 19.5), axis.text.x = element_blank(), legend.text = element_text(size = 17, color = 'black'), legend.title = element_text(size = 17, color = 'black'), legend.position = c(0.93,0.74), axis.ticks = element_line (colour = "black", size = 1),  axis.line = element_line(color = "black", size = 1),legend.key.width=unit(2.3,"cm"),axis.text.y = element_text(size = 18, color = 'black'))
 
 #pH plots
-b<-ggplot(phys_data, aes(x = same_year(Date),y = pH, group = as.factor(year(Date))))+
-  geom_line(aes(linetype = as.factor(year(Date))), size = 1.1)+
-  theme_classic()+
+b<-ggplot(phys_data, aes(x = same_year(Date),y = pH, group = as.factor(year(Date)), 
+                         color = as.factor(year(Date))))+
+  geom_line(aes(linetype = as.factor(year(Date))), size = 1.5)+
+  scale_color_colorblind()+
+  theme_matt()+
   annotate(geom="text",x=as.Date("2000-06-10"),
            y=Inf,label="B",fontface="bold", size = 8, vjust = 2,hjust = 2)+
   labs(x = "",y = "pH")+
   theme(axis.title = element_text(size = 19.5), axis.text.x = element_blank(), legend.position = 'none', axis.ticks = element_line (colour = "black", size = 1),  axis.line = element_line(color = "black", size = 1),axis.text.y = element_text(size = 18, color = 'black'))
 
 #Salinity plots
-c<-ggplot(phys_data, aes(x = same_year(Date),y = Salinity, group = as.factor(year(Date))))+
-  geom_line(aes(linetype = as.factor(year(Date))), size = 1.1)+
-  theme_classic()+
+c<-ggplot(phys_data, aes(x = same_year(Date),y = Salinity, group = as.factor(year(Date)), 
+                         color = as.factor(year(Date))))+
+  geom_line(aes(linetype = as.factor(year(Date))), size = 1.5)+
+  theme_matt()+
   annotate(geom="text",x=as.Date("2000-06-10"),
            y=Inf,label="C",fontface="bold", size = 8, vjust = 2,hjust = 2)+
   labs(x = "Month",y = "Salinity")+
-  theme(axis.title = element_text(size = 19.5, color = 'black'), axis.text = element_text(size = 18, color = 'black'), legend.position = 'none', axis.ticks = element_line (colour = "black", size = 1),  axis.line = element_line(color = "black", size = 1))
+  theme(axis.title = element_text(size = 19.5, color = 'black'), axis.text = element_text(size = 18, color = 'black'), legend.position = 'none', axis.ticks = element_line (colour = "black", size = 1),  axis.line = element_line(color = "black", size = 1))+
+  scale_color_colorblind()
 
 #combine plots
 a / b / c 
-
-#Write function so it forces all of these dates to be the same year (AKA same x scale) for nice plotting
-
 ```
 
 ```{r setting up data for fig 3, echo = FALSE, include = FALSE}
@@ -179,6 +184,7 @@ TukeyHSD(VYear)
 
 
 ```{r Figure 4, fig.cap = "Figure 4. Crassostrea virginica larval counts (A) D-hinge and (B) veliger collected from Great Bay Estuary, NH in 2018, 2019, and 2020. Black circles denote observations of larval counts during a given sampling period. Midlines within each boxplot represent median values, and the hinges indicate the first and third quartile ranges (25th and 75th percentiles).", echo = FALSE, fig.height = 4, warning = FALSE}
+
 a<-dat_all %>% 
   ggplot(.,aes(x = factor(Year), y = D))+
   geom_boxplot(width = 0.7)+
@@ -188,7 +194,7 @@ a<-dat_all %>%
   annotate('text', x = 3, y = 3500, label = "b", size = 6)+
   annotate('text', x = 0.65, y = Inf, label = "A", size = 7, vjust = 3, fontface = 'bold')+
   
-  theme_classic()+
+  theme_matt()+
   labs(x = 'Year', y = bquote("D-hinge larval count"~m^-3~""))+
   theme(axis.title = element_text(size = 17), 
         axis.text = element_text(size = 15, color = 'black'), axis.ticks = element_line (colour = "black", size = 1),  axis.line = element_line(color = "black", size = 1))
@@ -203,13 +209,14 @@ b<-dat_all %>%
   annotate('text', x = 3, y = 2.7, label = "b", size = 6)+
   annotate('text', x = 0.65, y = Inf, label = "B", size = 7, vjust = 3, fontface = 'bold')+
   
-  theme_classic()+
+  theme_matt()+
   labs(x = 'Year', y = bquote("Veliger larval count"~m^-3~""))+
   theme(axis.title = element_text(size = 17), 
         axis.text = element_text(size = 15, color = 'black'), axis.ticks = element_line (colour = "black", size = 1),  axis.line = element_line(color = "black", size = 1))
 #Plot both
 a |b 
 ```
+
 
 ```{r setting up for fig 5, echo = FALSE, include = FALSE}
 #setting up data for fig 5
@@ -248,7 +255,7 @@ new_pred %>%
   geom_point(aes(y = Dhinge), alpha = 0.75, size = 2)+
   geom_ribbon(aes(ymin = exp(lwr)-0.01, ymax = exp(upr)-0.01),alpha = 0.4)+
   labs(x = "Temperature (°C)",  y = bquote('log D-hinge larval count '~m^-3~''))+
-  theme_classic()+
+  theme_matt()+
   theme(axis.title = element_text(size = 25), 
         axis.text = element_text(size = 23, color = 'black'), 
         axis.ticks = element_line (colour = "black", size = 1), 
@@ -272,7 +279,7 @@ spat %>%
   ggplot(.,aes(x = Date , y= Spat))+
   geom_bar(stat = 'identity')+
   geom_errorbar(aes(ymin = Spat - SE, ymax = Spat+ SE), size = 0.75, width = 2)+
-  theme_classic()+
+  theme_matt()+
   labs(x = "Month (2020)", y = "Average spat settlement"~m^-2~"")+
   theme(axis.title = element_text(size = 25, color = 'black'), axis.text = element_text(size = 22, color ='black'), axis.line = element_line(size = 1))
 
