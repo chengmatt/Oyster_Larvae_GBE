@@ -34,8 +34,8 @@ shapefile_df1 <- fortify(shapefile1)
 gb<-ggmap(m)+
   geom_polygon_pattern(data=shapefile_df1,
                        aes(x = long, y = lat, group = group),#oyster reef natural
-                       fill    = 'grey33',
-                       colour  = 'grey33',
+                       fill    = 'springgreen4',
+                       colour  = 'springgreen4',
                        pattern = "none",pattern_density = 0.01, pattern_spacing=0.013, pattern_colour = "grey33", pattern_alpha = 0.8, alpha = 0.65, pattern_angle = 45)+
   geom_point(aes(x = -70.86365, y = 43.06843), data = NULL, 
              alpha = 0.5, color = "black", size = 4, pch= 18)+
